@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Apartments;
 use Illuminate\Http\Request;
-
 class ApartmentController extends Controller
 {
     /**
@@ -14,8 +13,8 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $list_obj = Category::all();
-        return view('home.apartment.show')->with('list_obj', $list_obj);
+        $list_obj = Apartments::paginate(6);
+        return view('home.apartment.list')->with('list_obj', $list_obj);
     }
 
     /**
@@ -25,7 +24,7 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        return view('home.apartment.create');
+
     }
 
     /**
@@ -40,11 +39,11 @@ class ApartmentController extends Controller
         $obj->name = Input::get('name');
         $obj->address = Input::get('address');
         $obj->price = Input::get('price');
-        $obj->description = Input::get('description');
+        $obj->description = Input::get('information');
         $obj->detail = Input::get('detail');
         $obj->images = Input::get('images');
         $obj->save();
-        return redirect('/home/apartment');
+        return redirect('/');
     }
 
     /**
@@ -71,12 +70,7 @@ class ApartmentController extends Controller
      */
     public function edit($id)
     {
-        $obj = Category::find($id);
-        if ($obj == null) {
-            return view('404');
-        }
-        return view('home.apartment.edit')
-            ->with('obj', $obj);
+
     }
 
     /**
@@ -88,15 +82,7 @@ class ApartmentController extends Controller
      */
     public function update($id)
     {
-        $obj = Category::find($id);
-        if ($obj == null) {
-            return view('404');
-        }
-        $obj->name = Input::get('name');
-        $obj->description = Input::get('description');
-        $obj->images = Input::get('images');
-        $obj->save();
-        return redirect('/home/apartment');
+
     }
 
     /**
@@ -107,11 +93,6 @@ class ApartmentController extends Controller
      */
     public function destroy($id)
     {
-        $obj = Category::find($id);
-        if ($obj == null) {
-            return response('Bakery not found or has been deleted!', 404);
-        }
-        $obj->delete();
-        return response('Deleted', 200);
+
     }
 }

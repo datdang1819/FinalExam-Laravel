@@ -11,4 +11,7 @@
 |
 */
 
-Route::resource('home/apartment', 'ApartmentController');
+Route::resource('/home/apartment', 'ApartmentController');
+Route::get('/home', function () {
+    return view('layouts.master');
+});

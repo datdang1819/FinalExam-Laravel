@@ -18,7 +18,7 @@ class CreateApartmentsTable extends Migration
             $table->string('name');
             $table->string('address');
             $table->integer('price');
-            $table->string('description');
+            $table->string('information');
             $table->string('detail');
             $table->string('images');
             $table->timestamps();
